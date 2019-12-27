@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import sec.project.domain.Signup;
 import sec.project.repository.SignupRepository;
+import org.springframework.ui.Model;
 
 @Controller
 public class SignupController {
@@ -27,6 +28,12 @@ public class SignupController {
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String submitForm(@RequestParam String name, @RequestParam String address) {
         signupRepository.save(new Signup(name, address));
+        return "redirect:/done";
+    }
+
+    @RequestMapping(value = "/done", method = RequestMethod.GET)
+    public String getUsers(Model model) {
+        model.addAttribute("signups", signupRepository.findAll());
         return "done";
     }
 
