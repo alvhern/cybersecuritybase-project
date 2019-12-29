@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Thank you!</title>
+    </head>
+    <body>
+
+        <h2>Registration details:</h2>
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+            </tr>
+            <tr th:each="signup: ${signups}">
+                <!--Without XSS vulnerability:
+                <td th:text="${signup.name}">Name ...</td>
+                <td th:text="${signup.address}">Address ...</td>
+                -->
+                <td th:utext="${signup.name}">Name ...</td>
+                <td th:utext="${signup.address}">Address ...</td>
+            </tr>
+        </table>
+
+        <form action="/form">
+            <input type="submit" value="Back" />
+        </form>
+
+    </body>
+</html>

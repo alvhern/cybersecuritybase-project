@@ -28,13 +28,13 @@ public class SignupController {
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String submitForm(@RequestParam String name, @RequestParam String address) {
         signupRepository.save(new Signup(name, address));
-        return "redirect:/done";
+        return "done";
     }
 
-    @RequestMapping(value = "/done", method = RequestMethod.GET)
-    public String getUsers(Model model) {
+    @RequestMapping(value = "/event", method = RequestMethod.GET)
+    public String getSignupValues(Model model) {
         model.addAttribute("signups", signupRepository.findAll());
-        return "done";
+        return "event";
     }
 
 }
